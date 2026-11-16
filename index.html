@@ -1,0 +1,1124 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Steeven Ngouala — Portfolio | BTS SIO SISR</title>
+  <meta name="description" content="Portfolio de Steeven Ngouala, étudiant en BTS SIO option SISR. Recherche de stage en support informatique, administration systèmes et réseaux.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js"></script>
+  <style>
+    :root {
+      --bg: #0b0a12;
+      --bg-elevated: #13111f;
+      --surface: #1a1729;
+      --surface-hover: #242038;
+      --border: rgba(167, 139, 250, 0.12);
+      --text: #f5f3ff;
+      --text-muted: #a5a1b8;
+      --accent: #a78bfa;
+      --accent-dim: #8b5cf6;
+      --accent-glow: rgba(167, 139, 250, 0.3);
+      --accent-2: #c4b5fd;
+      --success: #34d399;
+      --radius: 16px;
+      --radius-sm: 10px;
+      --shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.55);
+      --font: 'Outfit', system-ui, -apple-system, sans-serif;
+      --font-display: 'Space Grotesk', system-ui, sans-serif;
+      --mono: 'JetBrains Mono', ui-monospace, monospace;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+      scroll-padding-top: 80px;
+    }
+
+    body {
+      font-family: var(--font);
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+
+    /* Background grid + subtle glow */
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background-image: 
+        linear-gradient(rgba(167, 139, 250, 0.035) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(167, 139, 250, 0.035) 1px, transparent 1px);
+      background-size: 60px 60px;
+      pointer-events: none;
+      z-index: -1;
+    }
+
+    body::after {
+      content: '';
+      position: fixed;
+      top: -20%;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 80vw;
+      height: 50vh;
+      background: radial-gradient(ellipse, rgba(139, 92, 246, 0.12) 0%, transparent 70%);
+      pointer-events: none;
+      z-index: -1;
+    }
+
+    a {
+      color: var(--accent);
+      text-decoration: none;
+      transition: color 0.25s ease;
+    }
+    a:hover {
+      color: var(--accent-2);
+    }
+
+    /* Scroll reveal animation */
+    .reveal {
+      opacity: 0;
+      transform: translateY(28px);
+      transition: opacity 0.7s ease, transform 0.7s ease;
+    }
+    .reveal.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    .reveal-delay-1 { transition-delay: 0.1s; }
+    .reveal-delay-2 { transition-delay: 0.2s; }
+    .reveal-delay-3 { transition-delay: 0.3s; }
+    .reveal-delay-4 { transition-delay: 0.4s; }
+
+    /* NAV */
+    nav {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 100;
+      background: rgba(11, 10, 18, 0.82);
+      backdrop-filter: blur(18px);
+      border-bottom: 1px solid var(--border);
+      padding: 0 1.5rem;
+      transition: background 0.3s ease;
+    }
+
+    .nav-inner {
+      max-width: 1100px;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: 68px;
+    }
+
+    .logo {
+      font-family: var(--font-display);
+      font-weight: 700;
+      font-size: 1.2rem;
+      letter-spacing: -0.03em;
+      color: var(--text);
+    }
+    .logo span {
+      color: var(--accent);
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 1.75rem;
+      list-style: none;
+      align-items: center;
+    }
+
+    .nav-links a {
+      color: var(--text-muted);
+      font-size: 0.9rem;
+      font-weight: 500;
+      transition: color 0.25s ease;
+    }
+    .nav-links a:hover,
+    .nav-links a.active {
+      color: var(--accent);
+    }
+
+    .nav-cta {
+      background: linear-gradient(135deg, var(--accent-dim), var(--accent));
+      color: #0b0a12 !important;
+      padding: 0.5rem 1.15rem;
+      border-radius: 999px;
+      font-weight: 600;
+      font-size: 0.85rem;
+      transition: all 0.25s ease;
+    }
+    .nav-cta:hover {
+      filter: brightness(1.12);
+      color: #0b0a12 !important;
+      box-shadow: 0 0 20px var(--accent-glow);
+      transform: translateY(-1px);
+    }
+
+    .nav-cv {
+      color: var(--text-muted) !important;
+      border: 1px solid var(--border);
+      padding: 0.4rem 0.9rem;
+      border-radius: 999px;
+      font-weight: 500;
+      font-size: 0.85rem;
+      transition: all 0.25s ease;
+    }
+    .nav-cv:hover {
+      color: var(--accent) !important;
+      border-color: var(--accent);
+      background: rgba(167, 139, 250, 0.1);
+    }
+
+    .menu-toggle {
+      display: none;
+      background: none;
+      border: none;
+      color: var(--text);
+      font-size: 1.5rem;
+      cursor: pointer;
+    }
+
+    /* HERO */
+    .hero {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      padding: 6rem 1.5rem 4rem;
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+
+    .hero-content {
+      max-width: 720px;
+    }
+
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      background: rgba(167, 139, 250, 0.12);
+      border: 1px solid rgba(167, 139, 250, 0.3);
+      color: var(--accent);
+      font-size: 0.8rem;
+      font-weight: 500;
+      padding: 0.35rem 0.95rem;
+      border-radius: 999px;
+      margin-bottom: 1.5rem;
+      font-family: var(--mono);
+      animation: fadeInDown 0.8s ease both;
+    }
+
+    .badge::before {
+      content: '';
+      width: 8px;
+      height: 8px;
+      background: var(--success);
+      border-radius: 50%;
+      animation: pulse 2s infinite;
+      box-shadow: 0 0 8px var(--success);
+    }
+
+    @keyframes pulse {
+      0%, 100% { opacity: 1; transform: scale(1); }
+      50% { opacity: 0.5; transform: scale(0.85); }
+    }
+
+    @keyframes fadeInDown {
+      from { opacity: 0; transform: translateY(-16px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    @keyframes fadeInUp {
+      from { opacity: 0; transform: translateY(24px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .hero h1 {
+      font-family: var(--font-display);
+      font-size: clamp(2.5rem, 6vw, 3.75rem);
+      font-weight: 700;
+      letter-spacing: -0.04em;
+      line-height: 1.12;
+      margin-bottom: 1rem;
+      animation: fadeInUp 0.8s 0.15s ease both;
+    }
+
+    .hero h1 .highlight {
+      background: linear-gradient(135deg, #a78bfa 0%, #c4b5fd 45%, #e9d5ff 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .hero-subtitle {
+      font-size: 1.25rem;
+      color: var(--text-muted);
+      margin-bottom: 1.75rem;
+      font-weight: 400;
+      animation: fadeInUp 0.8s 0.25s ease both;
+    }
+
+    .hero-desc {
+      color: var(--text-muted);
+      font-size: 1.05rem;
+      max-width: 560px;
+      margin-bottom: 2.25rem;
+      animation: fadeInUp 0.8s 0.35s ease both;
+    }
+
+    .hero-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1rem;
+      margin-bottom: 2.5rem;
+      animation: fadeInUp 0.8s 0.45s ease both;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.55rem;
+      padding: 0.75rem 1.4rem;
+      border-radius: 999px;
+      font-weight: 600;
+      font-size: 0.95rem;
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      border: none;
+      cursor: pointer;
+    }
+
+    .btn-primary {
+      background: linear-gradient(135deg, var(--accent-dim), var(--accent));
+      color: #0b0a12;
+    }
+    .btn-primary:hover {
+      filter: brightness(1.12);
+      transform: translateY(-2px);
+      box-shadow: 0 10px 28px var(--accent-glow);
+    }
+
+    .btn-secondary {
+      background: transparent;
+      color: var(--text);
+      border: 1px solid var(--border);
+    }
+    .btn-secondary:hover {
+      border-color: var(--accent);
+      color: var(--accent);
+      background: rgba(167, 139, 250, 0.08);
+      transform: translateY(-2px);
+    }
+
+    .contact-pills {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1.25rem;
+      font-size: 0.9rem;
+      color: var(--text-muted);
+    }
+
+    .contact-pills a {
+      color: var(--text-muted);
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
+    }
+    .contact-pills a:hover {
+      color: var(--accent);
+    }
+
+    /* SECTIONS */
+    section {
+      padding: 5rem 1.5rem;
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+
+    .section-header {
+      margin-bottom: 2.5rem;
+    }
+
+    .section-label {
+      font-family: var(--mono);
+      font-size: 0.8rem;
+      color: var(--accent);
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      margin-bottom: 0.5rem;
+    }
+
+    .section-title {
+      font-family: var(--font-display);
+      font-size: 1.9rem;
+      font-weight: 700;
+      letter-spacing: -0.03em;
+    }
+
+    /* ABOUT */
+    .about-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 2.5rem;
+      align-items: start;
+    }
+
+    .about-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 1.75rem;
+    }
+
+    .about-card p {
+      color: var(--text-muted);
+      font-size: 1.05rem;
+    }
+
+    .info-list {
+      list-style: none;
+    }
+
+    .info-list li {
+      display: flex;
+      justify-content: space-between;
+      padding: 0.85rem 0;
+      border-bottom: 1px solid var(--border);
+      font-size: 0.95rem;
+    }
+    .info-list li:last-child {
+      border-bottom: none;
+    }
+
+    .info-list .label {
+      color: var(--text-muted);
+    }
+    .info-list .value {
+      font-weight: 500;
+      text-align: right;
+    }
+
+    /* TIMELINE / FORMATION & EXP */
+    .timeline {
+      position: relative;
+      padding-left: 1.75rem;
+    }
+
+    .timeline::before {
+      content: '';
+      position: absolute;
+      left: 0;
+      top: 8px;
+      bottom: 8px;
+      width: 2px;
+      background: linear-gradient(to bottom, var(--accent), transparent);
+    }
+
+    .timeline-item {
+      position: relative;
+      margin-bottom: 2rem;
+      padding-left: 1.25rem;
+    }
+
+    .timeline-item::before {
+      content: '';
+      position: absolute;
+      left: -1.85rem;
+      top: 0.45rem;
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+      background: var(--bg);
+      border: 2px solid var(--accent);
+      box-shadow: 0 0 0 4px var(--accent-glow);
+    }
+
+    .timeline-date {
+      font-family: var(--mono);
+      font-size: 0.8rem;
+      color: var(--accent);
+      margin-bottom: 0.35rem;
+    }
+
+    .timeline-title {
+      font-size: 1.15rem;
+      font-weight: 600;
+      margin-bottom: 0.25rem;
+    }
+
+    .timeline-org {
+      color: var(--text-muted);
+      font-size: 0.95rem;
+      margin-bottom: 0.75rem;
+    }
+
+    .timeline-desc {
+      color: var(--text-muted);
+      font-size: 0.95rem;
+    }
+
+    .timeline-desc ul {
+      margin-top: 0.5rem;
+      padding-left: 1.1rem;
+    }
+
+    .timeline-desc li {
+      margin-bottom: 0.35rem;
+    }
+
+    /* SKILLS */
+    .skills-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 1.25rem;
+    }
+
+    .skill-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 1.5rem;
+      transition: border-color 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
+    }
+    .skill-card:hover {
+      border-color: rgba(167, 139, 250, 0.4);
+      transform: translateY(-4px);
+      box-shadow: 0 12px 30px rgba(0, 0, 0, 0.3);
+    }
+
+    .skill-card h3 {
+      font-family: var(--font-display);
+      font-size: 1.05rem;
+      font-weight: 600;
+      margin-bottom: 1rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .skill-card h3 .icon,
+    .skill-card h3 [data-lucide] {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 22px;
+      height: 22px;
+      flex-shrink: 0;
+      color: var(--accent);
+    }
+    .skill-card h3 [data-lucide] {
+      width: 20px;
+      height: 20px;
+      stroke-width: 1.8;
+    }
+
+    .interest-pill [data-lucide] {
+      width: 18px;
+      height: 18px;
+      color: var(--accent);
+      stroke-width: 1.8;
+      flex-shrink: 0;
+    }
+
+    .inline-icon,
+    [data-lucide].inline-icon {
+      display: inline-flex;
+      vertical-align: -3px;
+      margin-right: 4px;
+      width: 16px;
+      height: 16px;
+      stroke-width: 1.8;
+    }
+
+    .contact-link [data-lucide] {
+      width: 18px;
+      height: 18px;
+      stroke-width: 1.8;
+      flex-shrink: 0;
+    }
+
+    .nav-cv [data-lucide],
+    .btn [data-lucide] {
+      width: 16px;
+      height: 16px;
+      stroke-width: 2;
+    }
+
+    .tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+    }
+
+    .tag {
+      background: rgba(167, 139, 250, 0.1);
+      border: 1px solid rgba(167, 139, 250, 0.2);
+      color: #ddd6fe;
+      font-size: 0.8rem;
+      padding: 0.3rem 0.7rem;
+      border-radius: 6px;
+      font-family: var(--mono);
+      transition: background 0.2s ease, border-color 0.2s ease;
+    }
+    .tag:hover {
+      background: rgba(167, 139, 250, 0.18);
+      border-color: rgba(167, 139, 250, 0.35);
+    }
+
+    /* PROJECTS */
+    .projects-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 1.5rem;
+    }
+
+    .project-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      overflow: hidden;
+      transition: border-color 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
+      display: flex;
+      flex-direction: column;
+    }
+    .project-card:hover {
+      border-color: rgba(167, 139, 250, 0.45);
+      transform: translateY(-5px);
+      box-shadow: 0 16px 40px rgba(0, 0, 0, 0.35);
+    }
+
+    .project-header {
+      background: linear-gradient(135deg, #0f172a, #1e293b);
+      padding: 1.5rem;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .project-header h3 {
+      font-size: 1.15rem;
+      margin-bottom: 0.35rem;
+    }
+
+    .project-type {
+      font-size: 0.8rem;
+      color: var(--accent);
+      font-family: var(--mono);
+    }
+
+    .project-body {
+      padding: 1.5rem;
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .project-body p {
+      color: var(--text-muted);
+      font-size: 0.95rem;
+      margin-bottom: 1.25rem;
+      flex: 1;
+    }
+
+    /* INTERESTS */
+    .interests {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1rem;
+    }
+
+    .interest-pill {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      padding: 0.75rem 1.25rem;
+      border-radius: 999px;
+      font-size: 0.95rem;
+      display: flex;
+      align-items: center;
+      gap: 0.55rem;
+      transition: border-color 0.25s ease, transform 0.25s ease;
+    }
+    .interest-pill:hover {
+      border-color: var(--accent);
+      transform: translateY(-2px);
+    }
+
+    /* CONTACT */
+    .contact-section {
+      text-align: center;
+      padding-bottom: 6rem;
+    }
+
+    .contact-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 2.5rem 2rem;
+      max-width: 560px;
+      margin: 0 auto;
+    }
+
+    .contact-card h2 {
+      font-size: 1.6rem;
+      margin-bottom: 0.75rem;
+    }
+
+    .contact-card p {
+      color: var(--text-muted);
+      margin-bottom: 1.75rem;
+    }
+
+    .contact-links {
+      display: flex;
+      flex-direction: column;
+      gap: 0.85rem;
+    }
+
+    .contact-link {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.75rem;
+      background: var(--bg-elevated);
+      border: 1px solid var(--border);
+      padding: 0.9rem 1.25rem;
+      border-radius: var(--radius-sm);
+      color: var(--text);
+      font-weight: 500;
+      transition: all 0.25s ease;
+    }
+    .contact-link .inline-icon svg {
+      width: 18px;
+      height: 18px;
+    }
+    .contact-link:hover {
+      border-color: var(--accent);
+      color: var(--accent);
+      background: rgba(167, 139, 250, 0.08);
+      transform: translateY(-2px);
+    }
+
+    .contact-cv-btn {
+      background: linear-gradient(135deg, var(--accent-dim), var(--accent)) !important;
+      color: #0b0a12 !important;
+      border: none !important;
+      font-weight: 600;
+    }
+    .contact-cv-btn:hover {
+      filter: brightness(1.1);
+      box-shadow: 0 8px 24px var(--accent-glow);
+      color: #0b0a12 !important;
+    }
+
+    /* FOOTER */
+    footer {
+      border-top: 1px solid var(--border);
+      padding: 2rem 1.5rem;
+      text-align: center;
+      color: var(--text-muted);
+      font-size: 0.85rem;
+    }
+
+    footer a {
+      color: var(--text-muted);
+    }
+    footer a:hover {
+      color: var(--accent);
+    }
+
+    /* RESPONSIVE */
+    @media (max-width: 768px) {
+      .nav-links {
+        display: none;
+        position: absolute;
+        top: 68px;
+        left: 0;
+        right: 0;
+        background: var(--bg-elevated);
+        flex-direction: column;
+        padding: 1.25rem;
+        border-bottom: 1px solid var(--border);
+        gap: 1rem;
+      }
+      .nav-links.open {
+        display: flex;
+      }
+      .menu-toggle {
+        display: block;
+      }
+      .about-grid {
+        grid-template-columns: 1fr;
+      }
+      .hero {
+        min-height: auto;
+        padding-top: 7rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- NAV -->
+  <nav>
+    <div class="nav-inner">
+      <a href="#" class="logo">Steeven<span>.</span>Ngouala</a>
+      <ul class="nav-links" id="navLinks">
+        <li><a href="#about">À propos</a></li>
+        <li><a href="#formation">Formation</a></li>
+        <li><a href="#experience">Expérience</a></li>
+        <li><a href="#competences">Compétences</a></li>
+        <li><a href="#projets">Projets</a></li>
+        <li><a href="CV_Steeven_Ngouala.pdf" class="nav-cv" download="CV_Steeven_Ngouala.pdf"><i data-lucide="download"></i> CV</a></li>
+        <li><a href="#contact" class="nav-cta">Contact</a></li>
+      </ul>
+      <button class="menu-toggle" id="menuToggle" aria-label="Menu">☰</button>
+    </div>
+  </nav>
+
+  <!-- HERO -->
+  <header class="hero">
+    <div class="hero-content">
+      <div class="badge">Disponible pour un stage</div>
+      <h1>Steeven <span class="highlight">Ngouala</span></h1>
+      <p class="hero-subtitle">Étudiant en BTS SIO 2ᵉ année — Option SISR</p>
+      <p class="hero-desc">
+        Passionné par l’administration des systèmes et des réseaux, je recherche un stage 
+        en support informatique pour mettre en pratique mes compétences techniques 
+        et contribuer au sein d’une équipe IT.
+      </p>
+      <div class="hero-actions">
+        <a href="#contact" class="btn btn-primary">Me contacter</a>
+        <a href="CV_Steeven_Ngouala.pdf" class="btn btn-secondary" download="CV_Steeven_Ngouala.pdf">
+          <i data-lucide="download"></i>
+          Télécharger mon CV
+        </a>
+      </div>
+      <div class="contact-pills">
+        <a href="mailto:steevenngouala05@gmail.com"><i data-lucide="mail" class="inline-icon"></i> steevenngouala05@gmail.com</a>
+        <a href="tel:+33745579156"><i data-lucide="phone" class="inline-icon"></i> +33 07 45 57 91 56</a>
+        <span><i data-lucide="map-pin" class="inline-icon"></i> Toulouse</span>
+      </div>
+    </div>
+  </header>
+
+  <!-- ABOUT -->
+  <section id="about">
+    <div class="section-header reveal">
+      <p class="section-label">// Profil</p>
+      <h2 class="section-title">À propos de moi</h2>
+    </div>
+    <div class="about-grid">
+      <div class="about-card reveal reveal-delay-1">
+        <p>
+          Étudiant en 2ᵉ année de BTS Services Informatiques aux Organisations (SIO), 
+          option SISR, je recherche un stage en support informatique, administration 
+          des systèmes et réseaux. Sérieux, rigoureux et doté d’un bon esprit d’analyse, 
+          je souhaite mettre en pratique mes compétences en installation et maintenance 
+          des postes de travail, diagnostic des incidents et configuration des réseaux, 
+          tout en développant mon expérience professionnelle au sein d’une équipe informatique.
+        </p>
+      </div>
+      <div class="about-card reveal reveal-delay-2">
+        <ul class="info-list">
+          <li>
+            <span class="label">Statut</span>
+            <span class="value">Étudiant BTS SIO — SISR</span>
+          </li>
+          <li>
+            <span class="label">Établissement</span>
+            <span class="value">VIDAL — Toulouse</span>
+          </li>
+          <li>
+            <span class="label">Période</span>
+            <span class="value">2025 – 2027</span>
+          </li>
+          <li>
+            <span class="label">Localisation</span>
+            <span class="value">Toulouse, France</span>
+          </li>
+          <li>
+            <span class="label">Langues</span>
+            <span class="value">Français (courant) · Anglais (intermédiaire)</span>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- FORMATION -->
+  <section id="formation">
+    <div class="section-header reveal">
+      <p class="section-label">// Parcours</p>
+      <h2 class="section-title">Formation</h2>
+    </div>
+    <div class="timeline">
+      <div class="timeline-item reveal reveal-delay-1">
+        <div class="timeline-date">2025 – 2027</div>
+        <h3 class="timeline-title">BTS Services Informatiques aux Organisations (SIO)</h3>
+        <p class="timeline-org">VIDAL — Toulouse · Option SISR</p>
+        <div class="timeline-desc">
+          <ul>
+            <li>Support informatique, réseaux et télécommunications</li>
+            <li>Cybersécurité et gestion des services informatiques</li>
+            <li>Développement d’applications et bases de logique informatique</li>
+          </ul>
+        </div>
+      </div>
+      <div class="timeline-item reveal reveal-delay-2">
+        <div class="timeline-date">2023</div>
+        <h3 class="timeline-title">Baccalauréat</h3>
+        <p class="timeline-org">Lycée Pierre Prié</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- EXPERIENCE -->
+  <section id="experience">
+    <div class="section-header reveal">
+      <p class="section-label">// Expérience</p>
+      <h2 class="section-title">Expérience professionnelle</h2>
+    </div>
+    <div class="timeline">
+      <div class="timeline-item reveal reveal-delay-1">
+        <div class="timeline-date">12 janvier – 13 mars 2025</div>
+        <h3 class="timeline-title">Stagiaire Maintenance Industrielle</h3>
+        <p class="timeline-org">Dietsmann Maintenance Energy Congo</p>
+        <div class="timeline-desc">
+          <ul>
+            <li>Participation aux opérations de maintenance préventive et corrective</li>
+            <li>Réalisation de contrôles et diagnostics techniques</li>
+            <li>Application des procédures de sécurité et de qualité</li>
+            <li>Travail en équipe sur différents équipements industriels et rédaction de rapports d’intervention</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- COMPETENCES -->
+  <section id="competences">
+    <div class="section-header reveal">
+      <p class="section-label">// Stack</p>
+      <h2 class="section-title">Compétences techniques</h2>
+    </div>
+    <div class="skills-grid">
+      <div class="skill-card reveal reveal-delay-1">
+        <h3><i data-lucide="monitor" class="icon"></i> Support informatique</h3>
+        <div class="tags">
+          <span class="tag">Installation & configuration</span>
+          <span class="tag">Diagnostic d’incidents</span>
+          <span class="tag">Assistance utilisateurs</span>
+          <span class="tag">Maintenance préventive</span>
+        </div>
+      </div>
+      <div class="skill-card reveal reveal-delay-2">
+        <h3><i data-lucide="settings" class="icon"></i> Systèmes</h3>
+        <div class="tags">
+          <span class="tag">Windows</span>
+          <span class="tag">Linux (Ubuntu)</span>
+          <span class="tag">Active Directory</span>
+          <span class="tag">DNS / DHCP</span>
+        </div>
+      </div>
+      <div class="skill-card reveal reveal-delay-3">
+        <h3><i data-lucide="globe" class="icon"></i> Réseaux</h3>
+        <div class="tags">
+          <span class="tag">Adressage IPv4</span>
+          <span class="tag">Sous-réseaux</span>
+          <span class="tag">Cisco (Packet Tracer)</span>
+          <span class="tag">Routage & commutation</span>
+        </div>
+      </div>
+      <div class="skill-card reveal reveal-delay-1">
+        <h3><i data-lucide="wrench" class="icon"></i> Outils</h3>
+        <div class="tags">
+          <span class="tag">Visual Studio</span>
+          <span class="tag">VirtualBox</span>
+          <span class="tag">Cisco Packet Tracer</span>
+          <span class="tag">Wireshark</span>
+        </div>
+      </div>
+      <div class="skill-card reveal reveal-delay-2">
+        <h3><i data-lucide="code-2" class="icon"></i> Programmation</h3>
+        <div class="tags">
+          <span class="tag">Python</span>
+          <span class="tag">Algorithmique</span>
+          <span class="tag">Logique de programmation</span>
+        </div>
+      </div>
+      <div class="skill-card reveal reveal-delay-3">
+        <h3><i data-lucide="languages" class="icon"></i> Langues</h3>
+        <div class="tags">
+          <span class="tag">Français — Courant</span>
+          <span class="tag">Anglais — Intermédiaire</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PROJETS (académiques / en cours) -->
+  <section id="projets">
+    <div class="section-header reveal">
+      <p class="section-label">// Réalisations</p>
+      <h2 class="section-title">Projets & pratiques</h2>
+    </div>
+    <div class="projects-grid">
+      <article class="project-card reveal reveal-delay-1">
+        <div class="project-header">
+          <p class="project-type">Formation · Réseaux</p>
+          <h3>Configuration réseau Cisco</h3>
+        </div>
+        <div class="project-body">
+          <p>
+            Mise en place de topologies réseau sous Cisco Packet Tracer : 
+            adressage IPv4, sous-réseaux, configuration de base des switchs et routeurs, 
+            services DNS et DHCP.
+          </p>
+          <div class="tags">
+            <span class="tag">Packet Tracer</span>
+            <span class="tag">IPv4</span>
+            <span class="tag">Cisco IOS</span>
+          </div>
+        </div>
+      </article>
+      <article class="project-card reveal reveal-delay-2">
+        <div class="project-header">
+          <p class="project-type">Formation · Systèmes</p>
+          <h3>Environnements Windows & Linux</h3>
+        </div>
+        <div class="project-body">
+          <p>
+            Installation et configuration de postes de travail Windows et machines virtuelles 
+            Ubuntu. Notions d’Active Directory, gestion des services réseau et diagnostics.
+          </p>
+          <div class="tags">
+            <span class="tag">Windows</span>
+            <span class="tag">Ubuntu</span>
+            <span class="tag">VirtualBox</span>
+            <span class="tag">AD</span>
+          </div>
+        </div>
+      </article>
+      <article class="project-card reveal reveal-delay-3">
+        <div class="project-header">
+          <p class="project-type">Formation · Support</p>
+          <h3>Diagnostic & résolution d’incidents</h3>
+        </div>
+        <div class="project-body">
+          <p>
+            Pratique du diagnostic d’incidents matériels et logiciels, assistance utilisateurs, 
+            maintenance préventive et utilisation d’outils d’analyse réseau (Wireshark).
+          </p>
+          <div class="tags">
+            <span class="tag">Support</span>
+            <span class="tag">Wireshark</span>
+            <span class="tag">Troubleshooting</span>
+          </div>
+        </div>
+      </article>
+    </div>
+  </section>
+
+  <!-- CENTRES D'INTÉRÊT -->
+  <section>
+    <div class="section-header reveal">
+      <p class="section-label">// Loisirs</p>
+      <h2 class="section-title">Centres d’intérêt</h2>
+    </div>
+    <div class="interests reveal reveal-delay-1">
+      <div class="interest-pill"><i data-lucide="book-open"></i> Lecture</div>
+      <div class="interest-pill"><i data-lucide="dumbbell"></i> Sport</div>
+      <div class="interest-pill"><i data-lucide="clapperboard"></i> Cinéma</div>
+    </div>
+  </section>
+
+  <!-- CONTACT -->
+  <section id="contact" class="contact-section">
+    <div class="contact-card reveal">
+      <h2>Intéressé par mon profil ?</h2>
+      <p>
+        Je suis actuellement à la recherche d’un stage en support informatique, 
+        systèmes ou réseaux. N’hésitez pas à me contacter !
+      </p>
+      <div class="contact-links">
+        <a href="CV_Steeven_Ngouala.pdf" class="contact-link contact-cv-btn" download="CV_Steeven_Ngouala.pdf">
+          <i data-lucide="download"></i>
+          Télécharger mon CV (PDF)
+        </a>
+        <a href="mailto:steevenngouala05@gmail.com" class="contact-link">
+          <i data-lucide="mail"></i>
+          steevenngouala05@gmail.com
+        </a>
+        <a href="tel:+33745579156" class="contact-link">
+          <i data-lucide="phone"></i>
+          +33 07 45 57 91 56
+        </a>
+        <a href="https://www.google.com/maps/place/Toulouse" target="_blank" rel="noopener" class="contact-link">
+          <i data-lucide="map-pin"></i>
+          27 Avenue des Mazades, 31200 Toulouse
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <p>© 2026 Steeven Ngouala — Portfolio BTS SIO SISR · Fait avec passion à Toulouse</p>
+  </footer>
+
+  <script>
+    // Lucide icons
+    lucide.createIcons();
+
+    // Mobile menu
+    const toggle = document.getElementById('menuToggle');
+    const links = document.getElementById('navLinks');
+    toggle.addEventListener('click', () => {
+      links.classList.toggle('open');
+    });
+
+    // Close menu on link click
+    links.querySelectorAll('a').forEach(a => {
+      a.addEventListener('click', () => links.classList.remove('open'));
+    });
+
+    // Active nav link on scroll
+    const sections = document.querySelectorAll('section[id]');
+    window.addEventListener('scroll', () => {
+      let current = '';
+      sections.forEach(section => {
+        const top = section.offsetTop - 100;
+        if (scrollY >= top) current = section.getAttribute('id');
+      });
+      links.querySelectorAll('a').forEach(a => {
+        a.classList.remove('active');
+        if (a.getAttribute('href') === '#' + current) a.classList.add('active');
+      });
+    });
+
+    // Scroll reveal animations
+    const revealElements = document.querySelectorAll('.reveal');
+    const revealObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+        }
+      });
+    }, {
+      threshold: 0.12,
+      rootMargin: '0px 0px -40px 0px'
+    });
+
+    revealElements.forEach(el => revealObserver.observe(el));
+  </script>
+</body>
+</html>
